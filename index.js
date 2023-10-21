@@ -1,28 +1,24 @@
-function Gravardados () {
+function Gravardados() {
     let dados = localStorage.getItem('database');
     let json = {};
 
     if (dados) {
-        json = JSON.parse (dados);
-    }else{
-        json = {livros:[{
-            nome: "",
-            nomeAutor: "",
-            genero: "",
-            isEmprestado: ""
-        }]}
+        json = JSON.parse(dados);
+    } else {
+        json = {
+            livros: []
+        };
     }
     return json;
 }
 
-function incluirContato (){
+function CadastrarLivro() {
     let dados = Gravardados();
 
-    let nomeLivro = document.getElementById ('inputNome').value;
-    let nomeAutor = document.getElementById ('inputAutor').value;
-    let genero = document.getElementById ('inputGenero').value;
-    let emprestado = document.getElementById ('').value;
-
+    let nomeLivro = document.getElementById('inputNome').value;
+    let nomeAutor = document.getElementById('inputAutor').value;
+    let genero = document.getElementById('genero_livro').value;
+    let emprestado = document.getElementById('inputEmprestado').value;
 
     let livro = {
         nome: nomeLivro,
@@ -32,23 +28,25 @@ function incluirContato (){
     };
 
     dados.livros.push(livro);
-    salvaDados (dados);
-    imprimeDados ();
+    Salvar(dados);
+    Exibirdados(dados.livros);
 }
 
-function Salvar (dados) {
-    localStorage.setItem ('database', JSON.stringify (dados));
+function Salvar(dados) {
+    localStorage.setItem('database', JSON.stringify(dados));
 }
 
-function Exibirdados () {
-    let tela = document.getElementById('tela');
-    let strHtml = '';
-    let objDados = leDados ();
-
-    for (i=0; i< objDados.contatos.length; i++) {
-        strHtml += `<p>${objDados.contatos[i].nome} - ${objDados.contatos[i].telefone}</p>`
+function Exibirdados(dados) {
+    let tabela = document.getElementById('biblioteca');
+    tabela.innerHTML = "";
+    for (let i = 0; i < dados.length; i++) {
+        let livro = dados[i];
+        tabela.innerHTML += `<tr><td scope="row">${i}</td>
+            <td>${livro.nome}</td>
+            <td>${livro.nomeAutor}</td>
+            <td>${livro.genero}</td>
+            <td>${livro.isEmprestado}</td></tr>`;
     }
-
-    tela.innerHTML = strHtml;
 }
 
+document.getElementById('cadastrar').addEventListener('click', CadastrarLivro);
