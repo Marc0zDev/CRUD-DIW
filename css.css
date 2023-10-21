@@ -1,0 +1,22 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto; 
+    text-align: center;
+    padding: 20px; 
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#form-cadastro{
+    text-align: left;
+}
+
+.form-group {
+    display: inline-block;
+    margin:10px ; 
+}
+.form-group label {
+    display: block;
+    text-align: left;
+}
