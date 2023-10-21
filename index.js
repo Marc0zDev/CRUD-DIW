@@ -32,16 +32,20 @@ function Exibirdados(dados) {
     let tabela = document.getElementById('conteudo_biblioteca');
     tabela.innerHTML = '';
 
-    for (let i = 0; i < dados.length; i++) {
-        let livro = dados[i];
-        tabela.innerHTML += `<tr>
-            <td scope="row">${i + 1}</td>
-            <td>${livro.nome}</td>
-            <td>${livro.nomeAutor}</td>
-            <td>${livro.genero}</td>
-            <td>${livro.isEmprestado}</td>
-            <td><button onclick="ExcluirLivro(${i})">Excluir</button></td>
-        </tr>`;
+    if (dados.length === 0) {
+        tabela.innerHTML = `<tr><td colspan="5">Nenhum livro encontrado.</td></tr>`;
+    } else {
+        for (let i = 0; i < dados.length; i++) {
+            let livro = dados[i];
+            tabela.innerHTML += `<tr>
+                <td scope="row">${i + 1}</td>
+                <td>${livro.nome}</td>
+                <td>${livro.nomeAutor}</td>
+                <td>${livro.genero}</td>
+                <td>${livro.isEmprestado}</td>
+                <td><button onclick="ExcluirLivro(${i})">Excluir</button></td>
+            </tr>`;
+        }
     }
 }
 
@@ -100,6 +104,21 @@ function DetalharLivro(index) {
     Autor: ${livro.nomeAutor}
     Gênero: ${livro.genero}
     Emprestado: ${livro.isEmprestado}`);
+}
+function PesquisarLivros() {
+    let termoPesquisa = document.getElementById('termoPesquisa').value.toLowerCase();
+    let generoFiltro = document.getElementById('filtroGenero').value;
+    let dados = JSON.parse(localStorage.getItem('database')) || { livros: [] };
+
+    let livrosFiltrados = dados.livros.filter((livro) => {
+        const nomeEmLowerCase = livro.nome.toLowerCase();
+        return (
+            nomeEmLowerCase.includes(termoPesquisa) &&
+            (generoFiltro === "" || generoFiltro === livro.genero)
+        );
+    });
+
+    Exibirdados(livrosFiltrados);
 }
 
 document.getElementById('cadastrar').addEventListener('click', CadastrarLivro);

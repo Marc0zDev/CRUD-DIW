@@ -51,9 +51,26 @@
                             <input type="button" class="btn btn-success" id="cadastrar" value="Inserir">
                             <input type="button" class="btn btn-warning" id="alterar" value="Alterar">
                             <input type="button" class="btn btn-secondary" id="Limpar" value="Limpar lista">
-                            <a href=""><input type="button" class="btn btn-secondary" id="btnClear" value="Pesquisar livro"></a>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="termoPesquisa" placeholder="Pesquisar por nome">
+                                </div>
+                                <div class="col-sm-6">
+                                    <button class="btn btn-primary" id="Pesquisar" onclick="PesquisarLivros()">Pesquisar</button>
+                                </div>
+                            </div>
+                            <label for="filtroGenero">Filtrar por Gênero:</label>
+                            <select id="filtroGenero" name="filtroGenero" class="form-control">
+                                <option value="">Todos</option>
+                                <option value="1">Romance</option>
+                                <option value="2">Terror</option>
+                                <option value="3">Mistério</option>
+                                <option value="4">Fantasia</option>
+                                <option value="5">Ficção científica</option>
+                            </select>
                         </div>
                     </div>
+                    
                 </form>
                 <div class="row">
                     <div class="col-sm-12">
