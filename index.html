@@ -22,6 +22,32 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="inputEdicao">Edição</label>
+                        <input type="text" class="form-control" id="inputEdicao" placeholder="Edição">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputAno">Ano</label>
+                        <input type="text" class="form-control" id="inputAno" placeholder="Ano">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPaginas">Qtde de Páginas</label>
+                        <input type="text" class="form-control" id="inputPaginas" placeholder="Qtde de Páginas">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputFoto">Foto</label>
+                        <input type="text" class="form-control" id="inputFoto" placeholder="URL da Foto">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputLocal">Local onde está guardado o livro</label>
+                        <input type="text" class="form-control" id="inputLocal" placeholder="Localização">
+                    </div>
+
+
+                    <div class="form-group">
                         <label for="inputAutor">Autor</label>
                         <input type="text" class="form-control" id="inputAutor" placeholder="Autor">
                     </div>
@@ -52,7 +78,6 @@
                         <div class="col-sm-12">
                             <input type="button" class="btn btn-success" id="cadastrar" value="Inserir">
                             <input type="button" class="btn btn-warning" id="alterar" value="Alterar">
-                            <input type="button" class="btn btn-secondary" id="Limpar" value="Limpar lista">
                         </div>
                     </div>
 
@@ -71,7 +96,7 @@
                                 <option value="Fantasia">Fantasia</option>
                                 <option value="Ficção científica">Ficção científica</option>
                             </select>
-                            
+
                             <select id="filtroEmprestado" name="filtroEmprestado" class="form-control">
                                 <option value="">Todos</option>
                                 <option value="sim">Sim</option>
@@ -92,18 +117,28 @@
         <div class="row">
             <div class="col-sm-12">
                 <table id="biblioteca" class="table table-striped">
-                    <thread>
+                    <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Autor</th>
                             <th scope="col">Gênero</th>
+                            <th scope="col">Edição</th>
+                            <th scope="col">Ano</th>
+                            <th scope="col">Qtde Páginas</th>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Local</th>
                             <th scope="col">Livro foi emprestado?</th>
                         </tr>
-                    </thread>
+                    </thead>
                     <tbody id="conteudo_biblioteca">
                         <tr>
                             <td scope="row">1</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -113,6 +148,7 @@
                 </table>
             </div>
         </div>
+
     </div>
     </div>
     </div>
