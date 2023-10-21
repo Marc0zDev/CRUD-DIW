@@ -108,19 +108,21 @@ function DetalharLivro(index) {
 function PesquisarLivros() {
     let termoPesquisa = document.getElementById('termoPesquisa').value.toLowerCase();
     let generoFiltro = document.getElementById('filtroGenero').value;
+    let emprestadoFiltro = document.getElementById('filtroEmprestado').value;
     let dados = JSON.parse(localStorage.getItem('database')) || { livros: [] };
 
-    
     let livrosFiltrados = dados.livros.filter((livro) => {
         const nomeEmLowerCase = livro.nome.toLowerCase();
         return (
             nomeEmLowerCase.includes(termoPesquisa) &&
-            (generoFiltro === "" || generoFiltro === livro.genero)
+            (generoFiltro === "" || generoFiltro === livro.genero) &&
+            (emprestadoFiltro === "" || emprestadoFiltro === livro.isEmprestado)
         );
     });
 
     Exibirdados(livrosFiltrados);
 }
+
 
 document.getElementById('cadastrar').addEventListener('click', CadastrarLivro);
 document.getElementById('alterar').addEventListener('click', EditarLivro);
