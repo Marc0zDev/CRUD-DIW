@@ -110,6 +110,7 @@ function PesquisarLivros() {
     let generoFiltro = document.getElementById('filtroGenero').value;
     let dados = JSON.parse(localStorage.getItem('database')) || { livros: [] };
 
+    
     let livrosFiltrados = dados.livros.filter((livro) => {
         const nomeEmLowerCase = livro.nome.toLowerCase();
         return (
