@@ -133,7 +133,7 @@ function criartabela(dados) {
                 <td>${livro.location}</td>
                 <td>${livro.loaned ? 'Sim' : 'Não'}</td>
                 <td><button class="btn btn-danger" onclick="ExcluirLivroPorId(${livro.id})">Excluir</button></td>
-                <td><button class="btn btn-info" onclick="MudaPag(${livro.id})">Editar</button></td>
+                <td><button class="btn btn-info" onclick="MudaPag(${livro.id})">Detalhar</button></td>
             </tr>`;
         }
 
