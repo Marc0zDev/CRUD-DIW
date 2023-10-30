@@ -44,6 +44,7 @@
 
 
 function EditarLivroPorId(id, novoLivro) {
+    window.location.href = detalhe.html?livroId=${livroId};
     let dados = JSON.parse(localStorage.getItem('database')) || { livros: [] };
     const index = dados.livros.findIndex(livro => livro.id === id);
 
@@ -136,7 +137,7 @@ function criartabela(dados) {
                 <td>${livro.location}</td>
                 <td>${livro.loaned ? 'Sim' : 'Não'}</td>
                 <td><button class="btn btn-danger" onclick="ExcluirLivroPorId(${livro.id})">Excluir</button></td>
-                <td><button class="btn btn-info" onclick="EditarLivroPorId(${livro.id})">Editar</button></td>
+                <td><button class="btn btn-info" onclick="window.location.href='detalhe.html';">Editar</button></td>
             </tr>`;
         }
 
