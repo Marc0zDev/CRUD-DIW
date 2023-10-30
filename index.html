@@ -6,88 +6,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastros de Livros</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <h4 class="card-title text-center">Feito por Marcos Vinicius e Guilherme Augusto</h4>
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h1 class="text-center">Cadastro de Livros</h1>
-                <h4 class="text-center">Feito por Marcos vinicius e Guilherme Augusto</h4>
-                <id form="form-cadastro">
+                <div class="card">
+                    <h1 class="card-header text-center">Cadastro de Livros</h1>
+                    <div class="card-body">
+                        <form id="form-cadastro">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputNome">Nome</label>
+                                        <input type="text" class="form-control" id="inputNome" placeholder="Nome">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="inputEdicao">Edição</label>
+                                        <input type="text" class="form-control" id="inputEdicao" placeholder="Edição">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="inputAno">Ano</label>
+                                        <input type="text" class="form-control" id="inputAno" placeholder="Ano">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputLocal">Local onde está guardado o livro</label>
+                                        <input type="text" class="form-control" id="inputLocal"
+                                            placeholder="Localização">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputPaginas">Quantidade de Páginas</label>
+                                        <input type="text" class="form-control" id="inputPaginas"
+                                            placeholder="Qtde de Páginas">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="inputFoto">Foto</label>
+                                        <input type="text" class="form-control" id="inputFoto"
+                                            placeholder="URL da Foto">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputAutor">Autor</label>
+                                        <input type="text" class="form-control" id="inputAutor" placeholder="Autor">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="genero_livro">Gênero de Livro:</label>
+                                        <select id="genero_livro" name="genero_livro" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="emprestado">O livro já foi emprestado?</label>
+                                        <div class="form-check">
+                                            <input type="radio" id="sim" name="emprestado" value="sim"
+                                                class="form-check-input">
+                                            <label for="sim" class="form-check-label">Sim</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" id="nao" name="emprestado" value="nao"
+                                                class="form-check-input">
+                                            <label for="nao" class="form-check-label">Não</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <input type="button" class="btn btn-success" id="cadastrar" value="Inserir">
+                                    <input type="button" class="btn btn-warning" id="alterar" value="Alterar">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="card">
+            <h4 class="card-header text-center">Filtrar Livros</h4>
+            <div class="card-body">
+                <form id="form-pesquisa">
                     <div class="form-group">
-                        <label for="inputNome">Nome</label>
-                        <input type="text" class="form-control" id="inputNome" placeholder="Nome">
+                        <label for="termoPesquisa">Pesquisar por Nome:</label>
+                        <input type="text" class="form-control" id="termoPesquisa" placeholder="Pesquisar por nome">
                     </div>
-
-                    <div class="form-group">
-                        <label for="inputEdicao">Edição</label>
-                        <input type="text" class="form-control" id="inputEdicao" placeholder="Edição">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputAno">Ano</label>
-                        <input type="text" class="form-control" id="inputAno" placeholder="Ano">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputPaginas">Qtde de Páginas</label>
-                        <input type="text" class="form-control" id="inputPaginas" placeholder="Qtde de Páginas">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputFoto">Foto</label>
-                        <input type="text" class="form-control" id="inputFoto" placeholder="URL da Foto">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputLocal">Local onde está guardado o livro</label>
-                        <input type="text" class="form-control" id="inputLocal" placeholder="Localização">
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="inputAutor">Autor</label>
-                        <input type="text" class="form-control" id="inputAutor" placeholder="Autor">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="genero_livro">Gênero de Livro:</label>
-                        <select id="genero_livro" name="genero_livro" class="form-control">
-                            <option value="Romance">Romance</option>
-                            <option value="Terror">Terror</option>
-                            <option value="Mistério">Mistério</option>
-                            <option value="Fantasia">Fantasia</option>
-                            <option value="Ficção científica">Ficção científica</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="emprestado">O livro já foi emprestado?</label>
-                        <div class="form-check">
-                            <input type="radio" id="sim" name="emprestado" value="sim" class="form-check-input">
-                            <label for="sim" class="form-check-label">Sim</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" id="nao" name="emprestado" value="nao" class="form-check-input">
-                            <label for="nao" class="form-check-label">Não</label>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn btn-success" id="cadastrar" value="Inserir">
-                            <input type="button" class="btn btn-warning" id="alterar" value="Alterar">
-                        </div>
-                    </div>
-
-                    <label for="pesquisa">Filtrar por Gênero ou Nome:</label>
-                    <div id="pesquisa" class="form-group row">
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="termoPesquisa" placeholder="Pesquisar por nome">
-                        </div>
-
-                        <div class="col-sm-4">
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label for="filtroGenero">Filtrar por Gênero:</label>
                             <select id="filtroGenero" name="filtroGenero" class="form-control">
                                 <option value="">Todos</option>
                                 <option value="Romance">Romance</option>
@@ -96,58 +128,58 @@
                                 <option value="Fantasia">Fantasia</option>
                                 <option value="Ficção científica">Ficção científica</option>
                             </select>
-
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="filtroEmprestado">Filtrar por Empréstimo:</label>
                             <select id="filtroEmprestado" name="filtroEmprestado" class="form-control">
                                 <option value="">Todos</option>
                                 <option value="sim">Sim</option>
                                 <option value="nao">Não</option>
                             </select>
                         </div>
-
-
-                        <div class="col-sm-4">
-                            <button class="btn btn-primary" id="Pesquisar"
-                                onclick="PesquisarLivros()">Pesquisar</button>
-                        </div>
                     </div>
+                    <button class="btn btn-primary" id="Pesquisar" onclick="PesquisarLivros()">Pesquisar</button>
+                </form>
             </div>
         </div>
 
-        </form>
-        <div class="row">
-            <div class="col-sm-12">
-                <table id="biblioteca" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Autor</th>
-                            <th scope="col">Gênero</th>
-                            <th scope="col">Edição</th>
-                            <th scope="col">Ano</th>
-                            <th scope="col">Qtde Páginas</th>
-                            <th scope="col">Foto</th>
-                            <th scope="col">Local</th>
-                            <th scope="col">Livro foi emprestado?</th>
-                        </tr>
-                    </thead>
-                    <tbody id="conteudo_biblioteca">
-                        <tr>
-                            <td scope="row">1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    </div>
+
+    </form>
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="biblioteca" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Gênero</th>
+                        <th scope="col">Edição</th>
+                        <th scope="col">Ano</th>
+                        <th scope="col">Qtde Páginas</th>
+                        <th scope="col">Foto</th>
+                        <th scope="col">Local</th>
+                        <th scope="col">Livro foi emprestado?</th>
+                    </tr>
+                </thead>
+                <tbody id="conteudo_biblioteca">
+                    <tr>
+                        <td scope="row">1</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+    </div>
 
     </div>
     </div>

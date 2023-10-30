@@ -1,10 +1,8 @@
-function CadastrarLivro() {
+/*function CadastrarLivro() {
     let nomeLivro = document.getElementById('inputNome').value;
     let nomeAutor = document.getElementById('inputAutor').value;
     let genero = document.getElementById('genero_livro').value;
     let emprestado = document.querySelector('input[name="emprestado"]:checked').value;
-
-    // Aqui você também deve coletar os novos campos
     let edicao = document.getElementById('inputEdicao').value;
     let ano = document.getElementById('inputAno').value;
     let paginas = document.getElementById('inputPaginas').value;
@@ -44,51 +42,78 @@ function CadastrarLivro() {
     Exibirdados(dados.livros);
 }
 
-function EditarLivro(index) {
+
+function EditarLivroPorId(id, novoLivro) {
     let dados = JSON.parse(localStorage.getItem('database')) || { livros: [] };
-    let livro = dados.livros[index];
+    const index = dados.livros.findIndex(livro => livro.id === id);
 
-    document.getElementById('inputNome').value = livro.nome;
-    document.getElementById('inputAutor').value = livro.nomeAutor;
-    document.getElementById('genero_livro').value = livro.genero;
-    document.querySelector('input[name="emprestado"][value="' + livro.isEmprestado + '"]').checked = true;
-
-    // Aqui você também deve preencher os novos campos
-    document.getElementById('inputEdicao').value = livro.edicao;
-    document.getElementById('inputAno').value = livro.ano;
-    document.getElementById('inputPaginas').value = livro.paginas;
-    document.getElementById('inputFoto').value = livro.foto;
-    document.getElementById('inputLocal').value = livro.local;
-
-    document.getElementById('cadastrar').setAttribute('data-index', index);
-    document.getElementById('cadastrar').textContent = 'Salvar Edição';
-
-    document.getElementById('cadastrar').onclick = function () {
-        let editedLivro = {
-            nome: document.getElementById('inputNome').value,
-            nomeAutor: document.getElementById('inputAutor').value,
-            genero: document.getElementById('genero_livro').value,
-            isEmprestado: document.querySelector('input[name="emprestado"]:checked').value,
-            edicao: document.getElementById('inputEdicao').value,
-            ano: document.getElementById('inputAno').value,
-            paginas: document.getElementById('inputPaginas').value,
-            foto: document.getElementById('inputFoto').value,
-            local: document.getElementById('inputLocal').value
-        };
-
-        dados.livros[index] = editedLivro;
+    if (index !== -1) {
+        dados.livros[index] = { ...dados.livros[index], ...novoLivro };
         localStorage.setItem('database', JSON.stringify(dados));
+        return true; 
+    }
 
-        LimparCampos();
-        document.getElementById('cadastrar').textContent = 'Inserir';
-        document.getElementById('cadastrar').onclick = CadastrarLivro;
-        Exibirdados(dados.livros);
-    };
+    return false; 
 }
 
+function ExcluirLivroPorId(id) {
+    let dados = JSON.parse(localStorage.getItem('database')) || { livros: [] };
+    const index = dados.livros.findIndex(livro => livro.id === id);
 
+    if (index !== -1) {
+        dados.livros.splice(index, 1);
+        localStorage.setItem('database', JSON.stringify(dados));
+        return true; 
+    }
 
-function Exibirdados(dados) {
+    return false; 
+}
+*/
+
+function preencherSelect(dados, primeiroElemento, segundoElemento) {
+    const generos = [];
+
+    for (let i = 0; i < dados.length; i++) {
+        generos[i] = dados[i].desc;
+    }
+
+    const selectGenero = document.getElementById(primeiroElemento);
+    const selectGeneroTwo = document.getElementById(segundoElemento);
+    selectGenero.innerHTML = '';
+    selectGeneroTwo.innerHTML = '';
+
+    const optionTodos = document.createElement('option');
+    optionTodos.value = '';
+    optionTodos.text = 'Todos';
+    selectGenero.appendChild(optionTodos);
+
+    const optionTodosCopy = optionTodos.cloneNode(true);
+    selectGeneroTwo.appendChild(optionTodosCopy);
+
+    generos.forEach(genero => {
+        const option = document.createElement('option');
+        option.value = genero;
+        option.text = genero;
+        selectGenero.appendChild(option);
+
+        const optionCopy = option.cloneNode(true);
+        selectGeneroTwo.appendChild(optionCopy);
+    });
+}
+
+function CarregarGeneros(API){
+    try {
+        consumirAPI(`${API}`).then(dados => {
+            preencherSelect(dados, 'filtroGenero', 'genero_livro');
+        }).catch(error => {
+            console.error('Erro ao carregar dados da API:', error);
+        });
+    } catch (error) {
+        console.error('Erro ao carregar dados da API:', error);
+    }
+}
+
+function criartabela(dados) {
     let tabela = document.getElementById('conteudo_biblioteca');
     tabela.innerHTML = '';
 
@@ -98,40 +123,35 @@ function Exibirdados(dados) {
         for (let i = 0; i < dados.length; i++) {
             let livro = dados[i];
             tabela.innerHTML += `<tr>
-                <td scope="row">${i + 1}</td>
-                <td>${livro.nome}</td>
-                <td>${livro.nomeAutor}</td>
-                <td>${livro.genero}</td>
-                <td>${livro.edicao}</td>
-                <td>${livro.ano}</td>
-                <td>${livro.paginas}</td>
-                <td>${livro.foto}</td>
-                <td>${livro.local}</td>
-                <td>${livro.isEmprestado}</td>
-                <td><button onclick="ExcluirLivro(${i})">Excluir</button></td>
+                <td scope="row">${livro.id}</td>
+                <td>${livro.title}</td>
+                <td>${livro.author}</td>
+                <td>${livro.genre}</td>
+                <td>${livro.edition}</td>
+                <td>${livro.year}</td>
+                <td>${livro.pages}</td>
+                <td>
+                    <img src="${livro.image}" alt="Imagem do Livro" width="100" height="100">
+                </td>
+                <td>${livro.location}</td>
+                <td>${livro.loaned ? 'Sim' : 'Não'}</td>
+                <td><button class="btn btn-danger" onclick="ExcluirLivroPorId(${livro.id})">Excluir</button></td>
+                <td><button class="btn btn-info" onclick="EditarLivroPorId(${livro.id})">Editar</button></td>
             </tr>`;
         }
+
     }
 }
 
 
 
-function ExcluirLivro(index) {
-    if (confirm('Tem certeza de que deseja excluir este livro?')) {
-        let dados = JSON.parse(localStorage.getItem('database')) || { livros: [] };
-        dados.livros.splice(index, 1);
-        localStorage.setItem('database', JSON.stringify(dados));
-        Exibirdados(dados.livros);
-    }
+function Exibirdados(dados) {
+    criartabela(dados);
+    CarregarGeneros('https://bookapi--wagnercipriano.repl.co/literary_style');
 }
 
 
-function LimparTabela() {
-    if (confirm('Tem certeza de que deseja limpar a lista de livros?')) {
-        localStorage.removeItem('database');
-        Exibirdados([]);
-    }
-}
+
 
 function DetalharLivro(index) {
     let dados = JSON.parse(localStorage.getItem('database')) || { livros: [] };
@@ -142,6 +162,7 @@ function DetalharLivro(index) {
     Gênero: ${livro.genero}
     Emprestado: ${livro.isEmprestado}`);
 }
+
 function PesquisarLivros() {
     let termoPesquisa = document.getElementById('termoPesquisa').value.toLowerCase();
     let generoFiltro = document.getElementById('filtroGenero').value;
@@ -160,10 +181,30 @@ function PesquisarLivros() {
     Exibirdados(livrosFiltrados);
 }
 
-function carregarDadosDaTabela() {
-    let dados = JSON.parse(localStorage.getItem('database')) || { livros: [] };
-    Exibirdados(dados.livros);
+async function carregarDadosDaTabela() {
+    try {
+        consumirAPI('https://bookapi--wagnercipriano.repl.co/books').then(dados => {
+            Exibirdados(dados);
+        }).catch(error => {
+            console.error('Erro ao carregar dados da API:', error);
+        });
+    } catch (error) {
+        console.error('Erro ao carregar dados da API:', error);
+    }
 }
+
+function consumirAPI(API) {
+    return fetch(`${API}`)
+        .then(response => response.json())
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error('Erro ao consumir a API:', error);
+            throw error; // Rejeita a promessa para que o erro seja propagado
+        });
+}
+
 
 
 document.addEventListener('DOMContentLoaded', carregarDadosDaTabela);
@@ -178,3 +219,4 @@ document.getElementById('conteudo_biblioteca').addEventListener('click', functio
         DetalharLivro(e.target.parentElement.rowIndex - 1);
     }
 });
+
