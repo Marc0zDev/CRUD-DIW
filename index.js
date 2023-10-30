@@ -41,23 +41,19 @@
 
     Exibirdados(dados.livros);
 }
+*/
 
-
-function EditarLivroPorId(id, novoLivro) {
-    window.location.href = detalhe.html?livroId=${livroId};
-    let dados = JSON.parse(localStorage.getItem('database')) || { livros: [] };
-    const index = dados.livros.findIndex(livro => livro.id === id);
-
-    if (index !== -1) {
-        dados.livros[index] = { ...dados.livros[index], ...novoLivro };
-        localStorage.setItem('database', JSON.stringify(dados));
-        return true; 
+function MudaPag(id) {
+    try{
+        console.log(id);
+        window.location.href = `detalhe.html?livroId=${id}`;
+    } catch (error) {
+        console.error('Erro ao carregar dados da API:', error);
     }
-
-    return false; 
+    
 }
 
-function ExcluirLivroPorId(id) {
+/*function ExcluirLivroPorId(id) {
     let dados = JSON.parse(localStorage.getItem('database')) || { livros: [] };
     const index = dados.livros.findIndex(livro => livro.id === id);
 
@@ -137,7 +133,7 @@ function criartabela(dados) {
                 <td>${livro.location}</td>
                 <td>${livro.loaned ? 'Sim' : 'Não'}</td>
                 <td><button class="btn btn-danger" onclick="ExcluirLivroPorId(${livro.id})">Excluir</button></td>
-                <td><button class="btn btn-info" onclick="window.location.href='detalhe.html';">Editar</button></td>
+                <td><button class="btn btn-info" onclick="MudaPag(${livro.id})">Editar</button></td>
             </tr>`;
         }
 
@@ -195,6 +191,7 @@ async function carregarDadosDaTabela() {
 }
 
 function consumirAPI(API) {
+    console.log(API);
     return fetch(`${API}`)
         .then(response => response.json())
         .then(data => {
